@@ -1,5 +1,5 @@
 import cv2
-import numpy as np
+import argparse
 
 
 FPS = 10
@@ -37,6 +37,19 @@ def make_light_message(message: str, path_to_images: str, save_video_at: str,
     video_writer.release()
 
 
+def main(_):
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--message', help='message to be displayed')
+    parser.add_argument('--path_to_images', help='path to image folder')
+    parser.add_argument('--save_video_at', help='file path to save resulting video')
+    parser.add_argument('--letter_duration', help='duration of lighted letter (seconds)')
+    parser.add_argument('--interval_duration', help='duration between letters (seconds)')
+    args = parser.parse_args()
+
+    make_light_message(args.message, args.path_to_images, args.save_video_at, args.letter_duration, args.interval_duration)
+
+
+"""
 if __name__ == "__main__":
     message = "00heLLo0"
     path_to_images = "images/"
@@ -45,3 +58,4 @@ if __name__ == "__main__":
     interval_duration = 1
 
     make_light_message(message, path_to_images, save_video_at, image_duration, interval_duration)
+"""
