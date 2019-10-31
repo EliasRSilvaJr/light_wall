@@ -17,3 +17,13 @@ python main.py
     --letter_duration <duration of lighted letter>
     --interval_duration <duration between letters>
 ```
+
+The program will print:
+  * A message indicating the start of video writing:
+  ```
+  Writing video at: <file path to save resulting video>
+  ``` 
+  * A message indicating the video was successfully written:
+  ```
+  Video was saved!!
+  ```

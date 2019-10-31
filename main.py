@@ -28,7 +28,12 @@ def make_light_message(message: str, path_to_images: str, save_video_at: str,
     frames_between_images = int(FPS * interval_duration)
 
     # Define the codec and create VideoWriter object
-    video_writer = cv2.VideoWriter(save_video_at, cv2.VideoWriter_fourcc('M', 'J', 'P', 'G'), FPS, (frame_width, frame_height))
+    video_writer = cv2.VideoWriter(
+        save_video_at, cv2.VideoWriter_fourcc('M', 'J', 'P', 'G'), FPS, (frame_width, frame_height)
+    )
+
+    print(f"Writing video at: {save_video_at}")
+
     write_image(video_writer, list_of_images[0], frames_per_image)
     for image in list_of_images[1:]:
         write_image(video_writer, none, frames_between_images)
@@ -36,8 +41,10 @@ def make_light_message(message: str, path_to_images: str, save_video_at: str,
 
     video_writer.release()
 
+    print("Video was saved!!")
 
-def main(_):
+
+if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--message', help='message to be displayed')
     parser.add_argument('--path_to_images', help='path to image folder')
@@ -46,16 +53,5 @@ def main(_):
     parser.add_argument('--interval_duration', help='duration between letters (seconds)')
     args = parser.parse_args()
 
-    make_light_message(args.message, args.path_to_images, args.save_video_at, args.letter_duration, args.interval_duration)
-
-
-"""
-if __name__ == "__main__":
-    message = "00heLLo0"
-    path_to_images = "images/"
-    save_video_at = f"videos/{message.lower()}.avi"
-    image_duration = 1.25
-    interval_duration = 1
-
-    make_light_message(message, path_to_images, save_video_at, image_duration, interval_duration)
-"""
+    make_light_message(args.message, args.path_to_images, args.save_video_at, float(args.letter_duration),
+                       float(args.interval_duration))
